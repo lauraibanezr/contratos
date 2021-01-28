@@ -1,12 +1,23 @@
 //importar express
 const express = require('express');
 
+//importar base de datos
+const db = require('./config/database.js');
+
+//importar rutas
+const routes = require('./routers');
+
+//Configurar base de datos
+db.authenticate()
+    .then(()=> console.log('DB Conectada'))
+    .catch(error => console.log(error));
+
+
 // configurar express
 const app = express();
-app.use('/',(req, res) =>{
-	//Se ve en el postman con localhost:3000/. El / significa como q la dirección pudiera ser /data
-    res.send('Conectado');
-});
+
+//cargar las rutas
+app.use('/',routes());
 
 app.listen(3000, () =>{
     //Se ve en la terminar 
