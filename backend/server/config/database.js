@@ -13,5 +13,5 @@ module.exports = new Sequalize('gestion_contratos', 'root', 'root', {
         acquire: 30000,
         idle: 10000
     },
-    operatorsAliases: false
+    operatorsAliases: 0
 })

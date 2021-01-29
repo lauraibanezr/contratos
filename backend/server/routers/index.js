@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const Contrato = require('../models/Contrato');
+/**Controladores */
+const contratosController = require('../controllers/contratosControllers');
+
 
 module.exports = function (){
     router.get('/',(req, res) => {
@@ -12,25 +14,11 @@ module.exports = function (){
 
 
     //Listar los contratos
-    router.get('/contratos',(req, res) => {
-      Contrato.findAll()  
-        .then (contrato => console.log(contrato))
-        .catch(error => console.log(error))
-       
-      res.json({mensaje: 'Listando'});
-    });
+    router.get('/contratos', contratosController.mostrarContratos);
 
-/*
     //Agrega nuevos contratos
-     router.get('/contratos',(req, res) => {
-       Contrato.findAll()  
-         .then (contrato => console.log(contrato))
-         .catch(error => console.log(error))
-         
-       res.json({mensaje: 'Listando'});
-     });
-  
-*/
+     router.post('/contratos', contratosController.nuevoContrato);
+
     router.get('/nosotros', (req, res) => {
         res.send('Nosotros');
     });
