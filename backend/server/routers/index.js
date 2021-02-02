@@ -23,6 +23,14 @@ module.exports = function (){
         res.send('Nosotros');
     });
 
+    router.delete('/contratos/:id', contratosController.eliminarContrato);
+
+   router.get('/contratos/:id', contratosController.obtenerContrato);
+
+
+    router.put('/contratos/', contratosController.actualizarContrato);
+
+    
     return router;
    
 }

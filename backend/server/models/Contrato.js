@@ -69,4 +69,5 @@ const Contrato = db.define('contrato',{
     },
 })
 
+
 module.exports = Contrato;

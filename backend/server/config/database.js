@@ -1,6 +1,6 @@
 const Sequalize = require('sequelize');
 
-module.exports = new Sequalize('gestion_contratos', 'root', 'root', {
+const sequelize = new Sequalize('gestion_contratos', 'root', 'root', {
     host: 'localhost',
     port: '3306',
     dialect: 'mysql',
@@ -15,3 +15,5 @@ module.exports = new Sequalize('gestion_contratos', 'root', 'root', {
     },
     operatorsAliases: 0
 })
+
+module.exports = sequelize
