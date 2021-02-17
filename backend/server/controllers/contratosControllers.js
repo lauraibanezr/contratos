@@ -1,12 +1,20 @@
 const Contrato = require('../models/Contrato');
 
 exports.mostrarContratos = (req, res) => {
-    Contrato.findAll()  
+  /*  Contrato.findAll()  
       .then (contrato => console.log(contrato))
       .catch(error => console.log(error))
      
     res.json({mensaje: 'Listando en consola'});
-}
+*/
+ /* const contrato = Contrato.findAll();
+  res.json(contrato);
+*/
+  
+Contrato.findAll()  
+.then (contrato => res.json(contrato))
+.catch(error => console.log(error))
+  }
 
 exports.nuevoContrato =  async (req, res, next) => {
 

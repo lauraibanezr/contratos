@@ -10,6 +10,9 @@ const routes = require('./routers');
 //importar body - parser para leer los contenidos de una peticion como json
 const bodyParser = require('body-parser')
 
+//oeyw
+const cors = require('cors')
+
 //Configurar base de datos
 db.authenticate()
     .then(()=> console.log('DB Conectada'))
@@ -21,7 +24,7 @@ const app = express();
 //habilitar el body-parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-
+app.use(cors())
 
 //cargar las rutas
 app.use('/',routes());
