@@ -1,1 +1,77 @@
-<p>contratos-list works!</p>
+<!--<h2>Listado de los contratos de la empresa</h2>
+<ul class="contratos">
+  <li>
+    <span class="badge">{{contratos.id_contrato}}</span>{{contratos.fecha_suscripcion}}
+  </li>
+</ul>-->
+<!--
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+</table>
+-->
+<mat-paginator [length]="contratos.length"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="handlePage($event)" showFirstLastButtons>
+</mat-paginator>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Número del contrato</th>
+    <th scope="col">Fecha de suscripción</th>
+    <th scope="col">Naturaleza de contrato</th>
+    <th scope="col">Proveedor</th>
+    <th scope="col">Cliente</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let contrato of contratos | paginate:page_size:page_number">
+    <th scope="row">{{ contrato.id_contrato }}</th>
+    <td>{{ contrato.numero_contrato }}</td>
+    <td>{{ contrato.fecha_suscripcion }}</td>
+    <td>{{ contrato.caracteristica }}</td>
+    <td>{{ contrato.partei }}</td>
+    <td>{{ contrato.parteii }}</td>
+  </tr>
+  </tbody>
+</table>
+<!--
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+    <option [ngValue]="2">2 items per page</option>
+    <option [ngValue]="4">4 items per page</option>
+    <option [ngValue]="6">6 items per page</option>
+  </select>
+</div>
+-->
+<!--
+<div class="col-md-4" *ngFor="let contrato of contratos">
+    <div class="card text-center">
+      <div class="card-header">
+        {{contrato.id_contrato}}
+      </div>
+      <div class="card-body">
+
+      </div>
+    </div>
+</div>
+-->
