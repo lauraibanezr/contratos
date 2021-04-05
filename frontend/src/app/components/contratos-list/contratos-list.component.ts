@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { FormControl } from '@angular/forms';
 import { ContratosService } from '../../services/contratos.service';
+import { DecimalPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-contratos-list',
   templateUrl: './contratos-list.component.html',
+  providers: [DecimalPipe],
   styleUrls: ['./contratos-list.component.css']
 })
 export class ContratosListComponent implements OnInit {
 
   contratos: any = [];
+  term : string ='';
 
   page_size: number = 5
   page_number: number = 1
@@ -24,14 +29,12 @@ export class ContratosListComponent implements OnInit {
 
   ngOnInit(): void {
     this.contratosService.getContratos().subscribe(
-      res => this.contratos = res,
+      res => this.contratos = res, 
      err => console.error(err)
     )
     //this.contratos = this.contratosService.getContratos();
-    //console.log(this.contratos);
+   // console.log(this.contratos);
   }
 
 }
-
-
 

@@ -1,35 +1,26 @@
-<!--<h2>Listado de los contratos de la empresa</h2>
-<ul class="contratos">
-  <li>
-    <span class="badge">{{contratos.id_contrato}}</span>{{contratos.fecha_suscripcion}}
-  </li>
-</ul>-->
-<!--
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-</table>
--->
+<h2>Listado de los contratos de la empresa</h2>
+
+<div class="row">
+  <div class="col-sm-8">
+    <button type="button" class="btn btn-primary">Añadir</button>
+  </div>
+  <div class="col-sm-4">
+    <form>
+      <div class="form-group form-inline">
+        <input type="text" [(ngModel)]="term" name="something" class="form-control" placeholder="Search here" style="width:40%;margin:30px 40px;float:right;">
+         <!--Buscar: <input class="form-control ml-2" type="text" [formControl]="filter"/> -->
+      </div>
+    </form>
+  </div>
+</div>
+
 <mat-paginator [length]="contratos.length"
                [pageSize]="page_size"
                [pageSizeOptions]="pageSizeOptions"
                (page)="handlePage($event)" showFirstLastButtons>
 </mat-paginator>
 
-<table class="table table-striped">
+<table class="table table-striped"  *ngIf="contratos">
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -41,7 +32,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let contrato of contratos | paginate:page_size:page_number">
+  <tr *ngFor="let contrato of contratos | filter:term | paginate:page_size:page_number">
     <th scope="row">{{ contrato.id_contrato }}</th>
     <td>{{ contrato.numero_contrato }}</td>
     <td>{{ contrato.fecha_suscripcion }}</td>

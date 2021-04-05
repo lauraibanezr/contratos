@@ -23,6 +23,11 @@ import { ContratoAddComponent } from './components/contrato-add/contrato-add.com
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMatPaginatorIntl } from './paginator-es';
+import { HighlightSearch  } from './pipes/highlight.pipe';
+import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,8 @@ import { CustomMatPaginatorIntl } from './paginator-es';
     HomeComponent,
     ContratosListComponent,
     ContratoAddComponent,
-    PaginatePipe
+    PaginatePipe,
+    HighlightSearch 
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,9 @@ import { CustomMatPaginatorIntl } from './paginator-es';
     HttpClientModule,
     MatPaginatorModule,
     APP_ROUTING,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2SearchPipeModule,
+    FormsModule
   ],
   providers: [
     ContratosService,
