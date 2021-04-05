@@ -32,13 +32,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let contrato of contratos | filter:term | paginate:page_size:page_number">
+  <tr *ngFor="let contrato of contratos | filter:term |paginate:page_size:page_number">
     <th scope="row">{{ contrato.id_contrato }}</th>
     <td>{{ contrato.numero_contrato }}</td>
     <td>{{ contrato.fecha_suscripcion }}</td>
-    <td>{{ contrato.caracteristica }}</td>
-    <td>{{ contrato.partei }}</td>
-    <td>{{ contrato.parteii }}</td>
+    <td><div [innerHTML]= "contrato.caracteristica | highlight : term"></div></td>
+    <td><div [innerHTML]= "contrato.partei | highlight : term"></div></td>
+    <td><div [innerHTML]= "contrato.parteii | highlight : term"></div></td>
   </tr>
   </tbody>
 </table>
