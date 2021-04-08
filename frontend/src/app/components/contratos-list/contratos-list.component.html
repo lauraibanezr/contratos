@@ -14,13 +14,13 @@
   </div>
 </div>
 
-<mat-paginator [length]="contratos.length"
-               [pageSize]="page_size"
+<mat-paginator [length]="(contratos| filter:term).length"
+               [pageSize]="(contratos| filter:term).length"
                [pageSizeOptions]="pageSizeOptions"
                (page)="handlePage($event)" showFirstLastButtons>
 </mat-paginator>
 
-<table class="table table-striped"  *ngIf="contratos">
+<table class="table table-striped"  *ngIf="contratos" >
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -32,7 +32,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let contrato of contratos | filter:term |paginate:page_size:page_number">
+    <ng-container *ngIf="( contratos | filter:term) as result">
+  <tr *ngFor="let contrato of result |paginate:page_size:page_number">
+
+  
+
+         
+
+
     <th scope="row">{{ contrato.id_contrato }}</th>
     <td>{{ contrato.numero_contrato }}</td>
     <td>{{ contrato.fecha_suscripcion }}</td>
@@ -40,29 +47,11 @@
     <td><div [innerHTML]= "contrato.partei | highlight : term"></div></td>
     <td><div [innerHTML]= "contrato.parteii | highlight : term"></div></td>
   </tr>
+    <tr>
+      <th></th>
+       <td colspan="6"><h1 class="text-center mx-auto" style="color: red;" *ngIf="result.length === 0" >no se encontraron resultados</h1>
+        </td>
+      </tr>
+</ng-container>
   </tbody>
 </table>
-<!--
-<div class="d-flex justify-content-between p-2">
-  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
-  </ngb-pagination>
-
-  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
-    <option [ngValue]="2">2 items per page</option>
-    <option [ngValue]="4">4 items per page</option>
-    <option [ngValue]="6">6 items per page</option>
-  </select>
-</div>
--->
-<!--
-<div class="col-md-4" *ngFor="let contrato of contratos">
-    <div class="card text-center">
-      <div class="card-header">
-        {{contrato.id_contrato}}
-      </div>
-      <div class="card-body">
-
-      </div>
-    </div>
-</div>
--->

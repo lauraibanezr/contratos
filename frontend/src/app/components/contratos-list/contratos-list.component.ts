@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { ContratosService } from '../../services/contratos.service';
 import { DecimalPipe } from '@angular/common';
-
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-contratos-list',
@@ -12,11 +12,12 @@ import { DecimalPipe } from '@angular/common';
   styleUrls: ['./contratos-list.component.css']
 })
 export class ContratosListComponent implements OnInit {
+  
 
   contratos: any = [];
-  term : string ='';
-
-  page_size: number = 5
+  term: string = '';
+  
+  page_size: number = 10
   page_number: number = 1
   pageSizeOptions = [5, 10, 20, 50, 100]
   
@@ -25,7 +26,7 @@ export class ContratosListComponent implements OnInit {
     this.page_number = e.pageIndex + 1
   }
 
-  constructor(private contratosService: ContratosService) { }
+  constructor(private contratosService: ContratosService) {}
 
   ngOnInit(): void {
     this.contratosService.getContratos().subscribe(
@@ -35,6 +36,10 @@ export class ContratosListComponent implements OnInit {
     //this.contratos = this.contratosService.getContratos();
    // console.log(this.contratos);
   }
-
+  prueba() {
+    var fila = this.contratos.length;
+   // var nFilas = $("#mi-tabla tr").length;
+    alert(fila);
+  }
 }
 

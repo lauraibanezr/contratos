@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 //peticiones http
 import { HttpClient } from '@angular/common/http';
 
-import { PipeTransform } from '@angular/core';
-import {DecimalPipe} from '@angular/common';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-
 //model
 import { Contrato } from '../models/Contrato';
 
