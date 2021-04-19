@@ -24,9 +24,10 @@ import { PaginatePipe } from './pipes/paginate.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMatPaginatorIntl } from './paginator-es';
 import { HighlightSearch  } from './pipes/highlight.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { MatInputModule } from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
 
 
 @NgModule({
@@ -47,7 +48,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     APP_ROUTING,
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [
     ContratosService,
