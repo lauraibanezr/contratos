@@ -1,25 +1,28 @@
 <h2>Listado de los contratos de la empresa</h2>
 
+<!--Primera seccion-->
 <div class="row">
-  <div class="col-sm-8">
-    <button type="button" class="btn btn-primary">Añadir</button>
-  </div>
-  <div class="col-sm-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary" style="float:right;">Añadir nuevo contrato</button>
+    </div>
+    
     <form>
-      <div class="form-group form-inline">
-        <input type="text" [(ngModel)]="term" name="something" class="form-control" placeholder="Search here" style="width:40%;margin:30px 40px;float:right;">
-         <!--Buscar: <input class="form-control ml-2" type="text" [formControl]="filter"/> -->
+      <div class="col">
+        <input type="text" [(ngModel)]="term" name="something" class="form-control" placeholder="Search here" style="width:100%;float:right;">
       </div>
     </form>
-  </div>
 </div>
 
+
+
+<!--Buscador-->
 <mat-paginator [length]="(contratos| filter:term).length"
                [pageSize]="(contratos| filter:term).length"
                [pageSizeOptions]="pageSizeOptions"
                (page)="handlePage($event)" showFirstLastButtons>
 </mat-paginator>
 
+<!--tabla-->
 <table class="table table-striped"  *ngIf="contratos" >
   <thead>
   <tr>
@@ -29,6 +32,7 @@
     <th scope="col">Naturaleza de contrato</th>
     <th scope="col">Proveedor</th>
     <th scope="col">Cliente</th>
+    <th scope="col">Acciones</th>
   </tr>
   </thead>
   <tbody>
@@ -46,6 +50,8 @@
     <td><div [innerHTML]= "contrato.caracteristica | highlight : term"></div></td>
     <td><div [innerHTML]= "contrato.partei | highlight : term"></div></td>
     <td><div [innerHTML]= "contrato.parteii | highlight : term"></div></td>
+    <td><button (click)="editContrato()" mat-icon-button aria-label="Edit"><mat-icon>edit</mat-icon></button></td>
+    <td><button mat-icon-button aria-label="Delete"><mat-icon>delete</mat-icon></button></td>
   </tr>
     <tr>
       <th></th>

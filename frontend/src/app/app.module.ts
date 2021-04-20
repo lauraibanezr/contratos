@@ -27,8 +27,10 @@ import { HighlightSearch  } from './pipes/highlight.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatInputModule } from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker'; 
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import {MatButtonModule} from '@angular/material/button'; 
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatButtonModule,
+    MatIconModule
+    //FontAwesomeModule
   ],
   providers: [
     ContratosService,

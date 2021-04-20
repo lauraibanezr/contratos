@@ -41,5 +41,10 @@ export class ContratosListComponent implements OnInit {
    // var nFilas = $("#mi-tabla tr").length;
     alert(fila);
   }
+
+  editContrato() {
+    console.log('Perfect')
+  }
+
 }
 
