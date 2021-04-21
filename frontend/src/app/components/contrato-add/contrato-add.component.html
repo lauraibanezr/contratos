@@ -1,161 +1,138 @@
 
 <div class="container-fluid">
 
-<h2>Agrega un nuevo contrato</h2>
-<h4>Verifique que este firmado el contrato antes de introducirlo en la base de datos</h4>
-
-    <form class="example-form">
-    <div class="row">
-        <div class="col">
-
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Número del contrato</mat-label>
-                <input type="text" matInput [formControl]="nameForm" placeholder="Ex. 10.22">
-                
-                <mat-error *ngIf="nameForm.hasError('required')">
-                El identificador del contrato es <strong>requerido</strong>
-                </mat-error>
-
-              </mat-form-field>
-        </div>
-        <div class="col">
-            
-            <mat-form-field appearance="outline"   class="example-full-width">
-                <mat-label>Naturaleza del contrato</mat-label>
-                <input type="text" matInput [formControl]="natForm" placeholder="Ex. Servicios">
-
-                <mat-error *ngIf="natForm.hasError('required')">
-                El tipo de contrato es <strong>requerido</strong>
-                </mat-error>   
-            </mat-form-field>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col">
-
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Cliente</mat-label>
-                <input type="text" name="cliente"
-                placeholder="Ex. Empresa que recibe el servicio"
-                minlength="5" ngModel matInput [formControl]="clienteForm"
-                >
-  
-                <mat-error *ngIf="clienteForm.hasError('required')">
-                El cliente es <strong>requerido</strong>
-                </mat-error>
-
-                 <!--   [class.is-invalid]="cliente.invalid && cliente.touched" 
-                #cliente="ngModel"-->
-
-              </mat-form-field>
-        </div>
-
-        <div class="col">
-            
-            <mat-form-field appearance="outline"
-            class="example-full-width">
-                <mat-label>Proveedor</mat-label>
-                <input type="text" matInput [formControl]="proForm" placeholder="Ex. Empresa que brinda el servicio">
-            
-                <mat-error *ngIf="proForm.hasError('required')">
-                El proveedor es <strong>requerido</strong>
-                </mat-error>  
-            
-                <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email is <strong>required</strong>
-                </mat-error>
-                -->
-            </mat-form-field>
-
-        </div>
-   
-    </div>
+    <h2>Agrega un nuevo contrato</h2>
+    <h4>Verifique que este firmado el contrato antes de introducirlo en la base de datos</h4>
     
-    <div class="row">
+        <form class="example-form" [formGroup]="forma" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Número del contrato</mat-label>
+                    <input type="text" matInput placeholder="Ex. 10.22" 
+                    [formControl]="forma.controls.nameForm">
+                    
+                    <mat-error *ngIf="forma.controls.nameForm.hasError('required')">
+                    El identificador del contrato es <strong>requerido</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">            
+                <mat-form-field appearance="outline"   class="example-full-width">
+                    <mat-label>Naturaleza del contrato</mat-label>
+                    <input type="text" matInput placeholder="Ex. Servicios" [formControl]="forma.controls.natForm">
 
-        <div class="col">
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Fecha de supscripción</mat-label>
-                <input matInput [matDatepicker]="dp" [formControl]="date">
-                <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-                <mat-datepicker #dp></mat-datepicker>
-                
-                <mat-error *ngIf="date.hasError('required')">La fecha de supscripción es <strong>requerida</strong></mat-error>
-
-            </mat-form-field>
-
-        </div>
-        <div class="col">
-            <mat-form-field appearance="outline"
-            class="example-full-width">
-                <mat-label>Fecha de vigencia de contrato</mat-label>
-                <input matInput [matDatepicker]="dp1" [formControl]="dateFin">
-
-                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
-                <mat-datepicker #dp1></mat-datepicker>
-                
-            </mat-form-field>
-            
-        </div>
-
-    </div>
-
-    <hr> 
-
-    <div class="row">
-
-        <div class="col">
-       
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Términos para el pago</mat-label>
-                <input type="text" matInput [formControl]="pagoForm">
-              </mat-form-field>
-        </div>
-        <div class="col">
-            
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Término de vigencia del contrato</mat-label>
-                <input type="text" matInput [formControl]="vigenciaForm">   
-            </mat-form-field>
-            
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col">
-       
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Términos para reclamar</mat-label>
-                <input type="text" matInput [formControl]="reclamarForm">
-              </mat-form-field>
-        </div>
-        <div class="col">
-            
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Término para contestar</mat-label>
-                <input type="text" matInput [formControl]="contestarForm">   
-            </mat-form-field>
-            
-        </div>
-
-    </div>
-
-
-    <hr> 
+                    <mat-error *ngIf="forma.controls.natForm.hasError('required')">
+                    El tipo de contrato es <strong>requerido</strong>
+                    </mat-error>   
+                </mat-form-field>
+            </div>
     
-      <div class="row">
-  
-        <div class="col">
-          <button type="button" class="btn btn-block btn-outline-primary">Agregar contrato</button>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Cliente</mat-label>
+                    <input type="text" name="cliente"
+                    placeholder="Ex. Empresa que recibe el servicio"
+                    minlength="5" matInput [formControl]="forma.controls.clienteForm">
+      
+                    <mat-error *ngIf="forma.controls.clienteForm.hasError('required')">
+                    El cliente es <strong>requerido</strong>
+                    </mat-error>
+                     <!--   [class.is-invalid]="cliente.invalid && cliente.touched" 
+                    #cliente="ngModel"-->
+                  </mat-form-field>
+            </div>
+    
+            <div class="col">    
+                <mat-form-field appearance="outline"
+                class="example-full-width">
+                    <mat-label>Proveedor</mat-label>
+                    <input type="text" matInput placeholder="Ex. Empresa que brinda el servicio" [formControl]="forma.controls.proForm">
+                
+                    <mat-error *ngIf="forma.controls.proForm.hasError('required')">
+                    El proveedor es <strong>requerido</strong>
+                    </mat-error>             
+                    <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                    </mat-error>
+                    -->
+                </mat-form-field>
+            </div>
+       
         </div>
         
-      </div>
-  </form>
-
-</div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Fecha de supscripción</mat-label>
+                    <input matInput [matDatepicker]="dp" [formControl]="forma.controls.date">
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp></mat-datepicker>
+                    
+                    <mat-error *ngIf="forma.controls.date.hasError('required')">La fecha de supscripción es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+    
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline"
+                class="example-full-width">
+                    <mat-label>Fecha de vigencia de contrato</mat-label>
+                    <input matInput [matDatepicker]="dp1" [formControl]="forma.controls.dateFin">
+    
+                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                    <mat-datepicker #dp1></mat-datepicker>                
+                </mat-form-field>
+                
+            </div>
+    
+        </div>
+    
+        <hr> 
+    
+        <div class="row">
+            <div class="col">      
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Términos para el pago</mat-label>
+                    <input type="text" matInput [formControl]="forma.controls.pagoForm">
+                  </mat-form-field>
+            </div>
+            <div class="col">        
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Término de vigencia del contrato</mat-label>
+                    <input type="text" matInput [formControl]="forma.controls.vigenciaForm">   
+                </mat-form-field>         
+            </div>
+    
+        </div>
+    
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Términos para reclamar</mat-label>
+                    <input type="text" matInput [formControl]="forma.controls.reclamarForm">
+                  </mat-form-field>
+            </div>
+            <div class="col">           
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Término para contestar</mat-label>
+                    <input type="text" matInput [formControl]="forma.controls.contestarForm">   
+                </mat-form-field>         
+            </div>
+        </div>
+    
+    
+        <hr> 
+        
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-block btn-outline-primary">Agregar contrato</button>
+            </div>    
+          </div>
+      </form>
+    
+    </div>

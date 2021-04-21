@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment';
@@ -35,37 +35,30 @@ export const MY_FORMATS = {
 })
 export class ContratoAddComponent implements OnInit {
 
-  nameForm = new FormControl('', [
-    Validators.required,
-  ]);
+  forma: FormGroup;
 
-  clienteForm = new FormControl('',
-    Validators.required,
-  );
+  constructor(private fb:FormBuilder) {this.crearFormulario() }
 
-  natForm = new FormControl('', [
-    Validators.required,
-  ]);
+  ngOnInit(): void { }
+  
+  crearFormulario() {
+    this.forma = this.fb.group({
+      nameForm: new FormControl('s', Validators.required),
+      clienteForm: new FormControl('', [Validators.required]),
+      natForm: new FormControl('', [ Validators.required]),
+      proForm: new FormControl('', [Validators.required]),
+      date: new FormControl(moment(),Validators.required),
+      dateFin: new FormControl(''),   
+      pagoForm: new FormControl(''),
+      vigenciaForm: new FormControl(''),
+      reclamarForm: new FormControl(''),
+      contestarForm: new FormControl(''),
+    
+    })
+  }
 
-  proForm = new FormControl('', [
-    Validators.required,
-  ]);
-
-
-  date = new FormControl(moment(),Validators.required);
-
-  dateFin = new FormControl('');
-
-  pagoForm = new FormControl('');
-  vigenciaForm = new FormControl('');
-  reclamarForm = new FormControl('');
-  contestarForm = new FormControl('');
-
-
-
-  constructor() { }
-
-  ngOnInit(): void {
+  guardar() {
+    console.log(this.forma.value);
   }
 
 }

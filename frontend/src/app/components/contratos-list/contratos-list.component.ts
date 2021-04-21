@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { ContratosService } from '../../services/contratos.service';
 import { DecimalPipe } from '@angular/common';
 import {Observable} from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contratos-list',
@@ -26,7 +27,7 @@ export class ContratosListComponent implements OnInit {
     this.page_number = e.pageIndex + 1
   }
 
-  constructor(private contratosService: ContratosService) {}
+  constructor(private contratosService: ContratosService, private router:Router) {}
 
   ngOnInit(): void {
     this.contratosService.getContratos().subscribe(
@@ -44,6 +45,10 @@ export class ContratosListComponent implements OnInit {
 
   editContrato() {
     console.log('Perfect')
+  }
+
+  add() {
+    this.router.navigate(['/con-add']);
   }
 
 }
