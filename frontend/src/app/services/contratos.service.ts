@@ -20,7 +20,7 @@ export class ContratosService {
   getContrato(id_contrato: number) { return this.http.get('${this.API_URI}/contratos/${id_contrato}') }
 
   saveContrato(contrato: Contrato) {
-    return this.http.post('${this.API_URI}/contratos', contrato);
+    return this.http.post(`${this.API_URI}/contratos`, contrato);
   }
 
   deleteContrato(id_contrato: number) {

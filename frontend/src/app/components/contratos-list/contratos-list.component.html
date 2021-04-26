@@ -18,7 +18,7 @@
 
 <!--Buscador-->
 <mat-paginator [length]="(contratos| filter:term).length"
-               [pageSize]="(contratos| filter:term).length"
+               [pageSize]="5"
                [pageSizeOptions]="pageSizeOptions"
                (page)="handlePage($event)" showFirstLastButtons>
 </mat-paginator>
@@ -52,7 +52,7 @@
     <td><div [innerHTML]= "contrato.partei | highlight : term"></div></td>
     <td><div [innerHTML]= "contrato.parteii | highlight : term"></div></td>
     <td><button (click)="editContrato()" mat-icon-button aria-label="Edit"><mat-icon>edit</mat-icon></button></td>
-    <td><button mat-icon-button aria-label="Delete"><mat-icon>delete</mat-icon></button></td>
+    <td><button mat-icon-button aria-label="Delete" (click)='deleteContrato(contrato)'><mat-icon>delete</mat-icon></button></td>
   </tr>
     <tr>
       <th></th>

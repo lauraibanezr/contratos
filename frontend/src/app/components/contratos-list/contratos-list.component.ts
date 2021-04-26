@@ -5,6 +5,7 @@ import { ContratosService } from '../../services/contratos.service';
 import { DecimalPipe } from '@angular/common';
 import {Observable} from 'rxjs';
 import { Router } from '@angular/router';
+import { Contrato } from 'src/app/models/Contrato';
 
 @Component({
   selector: 'app-contratos-list',
@@ -51,5 +52,8 @@ export class ContratosListComponent implements OnInit {
     this.router.navigate(['/con-add']);
   }
 
+  deleteContrato(contrato: Contrato) {
+    console.log(contrato.numero_contrato);
+  }
 }
 
