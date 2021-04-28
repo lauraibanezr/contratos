@@ -3,7 +3,7 @@ export interface Contrato {
     id_contrato?: number,
     numero_contrato: string,
     fecha_suscripcion: Date,
-    naturaleza_del_contrato: string,
+    naturaleza: string,
     caracteristica: string,
     partei: string,
     parteii: string,

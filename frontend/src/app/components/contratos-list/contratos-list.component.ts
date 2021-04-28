@@ -19,7 +19,7 @@ export class ContratosListComponent implements OnInit {
   contratos: any = [];
   term: string = '';
   
-  page_size: number = 10
+  page_size: number = 5
   page_number: number = 1
   pageSizeOptions = [5, 10, 20, 50, 100]
   
@@ -31,21 +31,18 @@ export class ContratosListComponent implements OnInit {
   constructor(private contratosService: ContratosService, private router:Router) {}
 
   ngOnInit(): void {
+    this.getContratos();
+  }
+
+  getContratos() {
     this.contratosService.getContratos().subscribe(
       res => this.contratos = res, 
      err => console.error(err)
     )
-    //this.contratos = this.contratosService.getContratos();
-   // console.log(this.contratos);
-  }
-  prueba() {
-    var fila = this.contratos.length;
-   // var nFilas = $("#mi-tabla tr").length;
-    alert(fila);
   }
 
-  editContrato() {
-    console.log('Perfect')
+  editContrato(id:number) {
+    console.log(id);
   }
 
   add() {
@@ -53,7 +50,20 @@ export class ContratosListComponent implements OnInit {
   }
 
   deleteContrato(contrato: Contrato) {
-    console.log(contrato.numero_contrato);
+    let id = contrato.id_contrato;
+    console.log(id);
+    this.contratosService.deleteContrato(id).subscribe(
+      res => {
+        //console.log(res);
+        //this.getContratos();
+        //this.contratos = this.contratos.filter(c => c !== contrato);
+        this.getContratos();
+      
+      },
+      err => console.log(err)
+   )
   }
+
+  
 }
 

@@ -9,7 +9,7 @@ const APP_ROUTERS: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'con-list', component: ContratosListComponent },
     { path: 'con-add', component: ContratoAddComponent },
-        
+    { path: 'con-edit/:id_contrato', component: ContratoAddComponent},   
     { path: '**', pathMatch: 'full', redirectTo: 'home'}
     
     //{ path: '**', component: PageNotFoundComponent },

@@ -25,20 +25,37 @@ exports.nuevoContrato =  async (req, res, next) => {
     .catch(error => console.log(error))
 }
 
-exports.obtenerContrato = async (req, res) => {
-  await Contrato.findByPk(req.params.id)
+exports.obtenerContrato = async (req, res, next) => {
+ /* await Contrato.findByPk(req.params.id)
     .then(contrato => console.log(contrato))
     .catch(error => console.log(error))
   res.json({mensaje:'Obtenido'})  
+  */
+  
+  try {
+    const contrato = await Contrato.findByPk(req.params.id);
+    res.json(contrato);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
 }
 
 
-exports.actualizarContrato = async (req, res) => {
+exports.actualizarContrato = async (req, res,next) => {
   let con = req.body;
-  await Contrato.update(con, { where : { id_contrato: req.body.id } })
-    .then(contrato => res.json({mensaje: 'Actualizado'}))
+  try {
+    const contrato = await Contrato.update(con, { where : { id_contrato: req.body.id_contrato } })
+    res.json(contrato);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+  /*await Contrato.update(con, { where : { id_contrato: req.body.id_contrato } })
+    .then(contrato => res.json(contrato))
     .catch(error => console.log(error))
-
+    */
+//{mensaje: 'Actualizado'}
 }
 
 exports.eliminarContrato = async (req, res) => {

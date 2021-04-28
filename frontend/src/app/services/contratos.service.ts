@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 //model
 import { Contrato } from '../models/Contrato';
 
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,19 +19,23 @@ export class ContratosService {
 
   getContratos() { return this.http.get('http://localhost:3000/contratos') }
  
-  getContrato(id_contrato: number) { return this.http.get('${this.API_URI}/contratos/${id_contrato}') }
+  getContrato(id_contrato: number): Observable<Contrato> { return this.http.get<Contrato>(`${this.API_URI}/contratos/${id_contrato}`);}
 
   saveContrato(contrato: Contrato) {
     return this.http.post(`${this.API_URI}/contratos`, contrato);
   }
 
   deleteContrato(id_contrato: number) {
-    return this.http.delete('${this.API_URI}/contratos/${id_contrato}');
+    return this.http.delete(`${this.API_URI}/contratos/${id_contrato}`);
   }
-
+/*
   updateContrato(id_contrato: number, contrato: Contrato) {
-    return this.http.put('${this.API_URI}/contratos/${id_contrato}', contrato);
+    return this.http.put(`${this.API_URI}/contratos/${id_contrato}`, contrato);
   }
+*/
 
+updateContrato(contrato: Contrato) {
+  return this.http.put(`${this.API_URI}/contratos`, contrato);
+}
 }
 

@@ -5,6 +5,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as moment from 'moment';
 import { ContratosService } from '../../services/contratos.service';
 import { Contrato } from '../../models/Contrato';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // import { default as _rollupMoment } from 'moment';
 
@@ -40,10 +41,36 @@ export class ContratoAddComponent implements OnInit {
 
   forma: FormGroup;
   contrato: Contrato;
+  edit: boolean = false;
 
-  constructor(private contratoService: ContratosService, private fb:FormBuilder) {this.crearFormulario() }
+  constructor(private contratoService: ContratosService, private fb:FormBuilder, private router:Router, private activeRoute: ActivatedRoute) {this.crearFormulario() }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const params = this.activeRoute.snapshot.params;
+ //   console.log(params);
+    if (params.id_contrato) {
+      this.contratoService.getContrato(params.id_contrato)
+        .subscribe(
+          res => {
+            this.contrato = res;
+            this.edit = true;
+            console.log(this.contrato);
+            this.forma.controls['nameForm'].setValue(res.numero_contrato);
+            this.forma.controls['clienteForm'].setValue(res.partei);
+            this.forma.controls['natForm'].setValue(res.caracteristica);
+            this.forma.controls['proForm'].setValue(res.parteii);
+            this.forma.controls['date'].setValue(res.fecha_suscripcion);
+            this.forma.controls['dateFin'].setValue(res.fecha_culminacion);
+            this.forma.controls['pagoForm'].setValue(res.termino_pago);
+            this.forma.controls['vigenciaForm'].setValue(res.termino_vigencia);
+            this.forma.controls['reclamarForm'].setValue(res.termino_reclamacion);
+            this.forma.controls['contestarForm'].setValue(res.termino_contestar);
+          },
+          err => console.log(err)
+        )
+    }
+  
+  }
   
   crearFormulario() {
     this.forma = this.fb.group({
@@ -61,29 +88,77 @@ export class ContratoAddComponent implements OnInit {
     })
   }
 
+  list() {
+    this.router.navigate(['/con-list']);
+  }
+
+  
   guardar() {
-    this.contrato = this.forma.value;
-    //console.log(this.forma.value);
-    //console.log(this.contrato);
-    this.contrato = renameKey(this.contrato, 'nameForm', 'numero_contrato');
-    this.contrato = renameKey(this.contrato, 'clienteForm', 'partei');
-    this.contrato = renameKey(this.contrato, 'natForm', 'naturaleza_del_contrato');
-    this.contrato = renameKey(this.contrato, 'proForm', 'parteii');
-    this.contrato = renameKey(this.contrato, 'date', 'fecha_suscripcion');
-    this.contrato = renameKey(this.contrato, 'dateFin', 'fecha_culminacion');
-    this.contrato = renameKey(this.contrato, 'pagoForm', 'termino_pago');
-    this.contrato = renameKey(this.contrato, 'vigenciaForm', 'termino_vigencia');
-    this.contrato = renameKey(this.contrato, 'reclamarForm', 'termino_reclamacion');
-    this.contrato = renameKey(this.contrato, 'contestarForm', 'termino_contestar');
-        
-    //console.log(this.contrato);
-    if (this.contrato.partei != '' || this.contrato.parteii != ''|| this.contrato.numero_contrato  != ''|| this.contrato.naturaleza_del_contrato != '') {
-      console.log('salvar');
+    console.log(this.edit);
+
+    if (this.edit == true) {
+      console.log('hay que editar');
+      this.contrato.caracteristica = this.forma.value.natForm;
+      this.contrato.numero_contrato = this.forma.value.nameForm;
+      this.contrato.partei = this.forma.value.clienteForm;
+      this.contrato.parteii = this.forma.value.proForm;
+
+      this.contrato.fecha_suscripcion = this.forma.value.date;
+      this.contrato.fecha_culminacion = this.forma.value.dateFin;
+      this.contrato.termino_pago = this.forma.value.pagoForm;
+      this.contrato.termino_vigencia = this.forma.value.vigenciaForm;
+      this.contrato.termino_reclamacion = this.forma.value.reclamarForm;
+      this.contrato.termino_contestar = this.forma.value.contestarForm;
+
+      console.log(this.contrato);
+     
+      this.contratoService.updateContrato(this.contrato).subscribe(
+        res => {
+          console.log('holis');
+          console.log(res);
+        },
+          err => console.error(err)
+      );
+
+      this.router.navigate(['/con-list']);
+
+    } else {
+      console.log('salvarlo')
+      this.contrato = this.forma.value;
+      //console.log(this.forma.value);
+      //console.log(this.contrato);
+      this.contrato = renameKey(this.contrato, 'nameForm', 'numero_contrato');
+      this.contrato = renameKey(this.contrato, 'clienteForm', 'partei');
+      this.contrato = renameKey(this.contrato, 'natForm', 'caracteristica');
+      this.contrato = renameKey(this.contrato, 'proForm', 'parteii');
+      this.contrato = renameKey(this.contrato, 'date', 'fecha_suscripcion');
+      this.contrato = renameKey(this.contrato, 'dateFin', 'fecha_culminacion');
+      this.contrato = renameKey(this.contrato, 'pagoForm', 'termino_pago');
+      this.contrato = renameKey(this.contrato, 'vigenciaForm', 'termino_vigencia');
+      this.contrato = renameKey(this.contrato, 'reclamarForm', 'termino_reclamacion');
+      this.contrato = renameKey(this.contrato, 'contestarForm', 'termino_contestar');
+          
+      //console.log(this.contrato);
+      if (this.contrato.partei != '' && this.contrato.parteii != '' && this.contrato.numero_contrato != '' && this.contrato.caracteristica != '') {
+        console.log('salvar');
+        //salvarrrr
+        this.contratoService.saveContrato(this.contrato).subscribe(
+          res => {
+            //console.log(res);
+            window.location.reload();
+          },
+            err => console.error(err)
+        );
+        this.router.navigate(['/con-list']);
+      } else {
+        console.log('no se salvo')
+      }
     }
-    console.log('no se salvo')
-    
 
+    /*
+   
 
+*/
    /* this.contratoService.saveContrato(this.contrato).subscribe(
       res => {
         console.log(res);
@@ -105,3 +180,4 @@ const renameKey = (object, key, newKey) => {
   return clonedObj;
 };
 const clone = (obj) => Object.assign({}, obj);
+
