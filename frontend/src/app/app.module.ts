@@ -31,7 +31,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 import {MatButtonModule} from '@angular/material/button'; 
 import { MatIconModule } from '@angular/material/icon';
-
+import { FichaclienteComponent } from './components/fichacliente/fichacliente.component';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     ContratosListComponent,
     ContratoAddComponent,
     PaginatePipe,
-    HighlightSearch 
+    HighlightSearch,
+    FichaclienteComponent 
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatDatepickerModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
     //FontAwesomeModule
   ],
   providers: [

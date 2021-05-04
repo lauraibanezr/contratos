@@ -7,11 +7,6 @@ import { ContratosService } from '../../services/contratos.service';
 import { Contrato } from '../../models/Contrato';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// import { default as _rollupMoment } from 'moment';
-
-
-// const moment = _rollupMoment || _moment;
-
 export const MY_FORMATS = {
   parse: {
     dateInput: 'LL',
@@ -92,7 +87,6 @@ export class ContratoAddComponent implements OnInit {
     this.router.navigate(['/con-list']);
   }
 
-  
   guardar() {
     console.log(this.edit);
 
@@ -114,19 +108,22 @@ export class ContratoAddComponent implements OnInit {
      
       this.contratoService.updateContrato(this.contrato).subscribe(
         res => {
-          console.log('holis');
+        /*  console.log('holis');*/
           console.log(res);
         },
           err => console.error(err)
       );
 
       this.router.navigate(['/con-list']);
-
+      this.contratoService.getContratos();
+      // window.location.reload();
     } else {
       console.log('salvarlo')
-      this.contrato = this.forma.value;
-      //console.log(this.forma.value);
-      //console.log(this.contrato);
+      console.log(this.contrato);
+      //this.contrato = this.forma.value;
+      console.log(this.forma.value);
+      console.log(this.contrato);
+      
       this.contrato = renameKey(this.contrato, 'nameForm', 'numero_contrato');
       this.contrato = renameKey(this.contrato, 'clienteForm', 'partei');
       this.contrato = renameKey(this.contrato, 'natForm', 'caracteristica');
@@ -137,10 +134,16 @@ export class ContratoAddComponent implements OnInit {
       this.contrato = renameKey(this.contrato, 'vigenciaForm', 'termino_vigencia');
       this.contrato = renameKey(this.contrato, 'reclamarForm', 'termino_reclamacion');
       this.contrato = renameKey(this.contrato, 'contestarForm', 'termino_contestar');
-          
+         
+      console.log(this.contrato);
+      console.log(this.forma.value.natForm);
+     
+ 
       //console.log(this.contrato);
-      if (this.contrato.partei != '' && this.contrato.parteii != '' && this.contrato.numero_contrato != '' && this.contrato.caracteristica != '') {
-        console.log('salvar');
+      if (this.forma.value.clienteForm != '' && this.forma.value.proForm != '' && this.forma.value.nameForm != '' && this.forma.value.natForm != '') {
+        console.log('salvando');
+
+
         //salvarrrr
         this.contratoService.saveContrato(this.contrato).subscribe(
           res => {

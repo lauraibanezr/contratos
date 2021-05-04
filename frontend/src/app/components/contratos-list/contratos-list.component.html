@@ -54,6 +54,9 @@
     <td><button [routerLink]="['/con-edit',contrato.id_contrato]" mat-icon-button aria-label="Edit"><mat-icon>edit</mat-icon></button></td>
     <td><button mat-icon-button aria-label="Delete" (click)='deleteContrato(contrato)'><mat-icon>delete</mat-icon></button></td>
     <!--(click)="editContrato(contrato.id_contrato)"-->
+
+    <td><button (click)="openView(contrato)" mat-icon-button aria-label="View"><mat-icon>search</mat-icon></button></td>
+  
   </tr>
     <tr>
       <th></th>

@@ -1,0 +1,45 @@
+<h1 mat-dialog-title style="text-align: center;">Contrato # {{data.id}}</h1>
+<div mat-dialog-content>
+    <table class="table borderless">
+        <tbody>
+          <tr>
+            <th scope="row">Cliente:</th>
+            <td>{{data.title}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Proveedor</th>
+            <td>{{data.sutitle}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Fecha de subscripción</th>
+            <td>{{data.fecha}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Fecha de subscripción</th>
+            <td>{{data.fecha}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Término de pago</th>
+            <td>{{data.pago}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Término de aceptar</th>
+            <td>{{data.aceptar}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Término de vigencia</th>
+            <td>{{data.vigencia}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Término de reclamación</th>
+            <td>{{data.reclamacion}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Fecha de culminación</th>
+            <td>{{data.fin}}</td>
+          </tr>
+        </tbody>
+      </table>
+<div mat-dialog-actions style="text-align: center;"> 
+   <button type="button" class="btn btn-primary" mat-dialog-close (click)="cancelar()">Close</button>
+</div>
